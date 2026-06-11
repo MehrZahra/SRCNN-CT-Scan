@@ -1,6 +1,5 @@
 # SRCNN-CT-Scan
 Deep learning-based SRCNN model for enhancing CT scan images of rock sample
-# Deep Learning-based SRCNN for CT Scan Image Enhancement of Oil Reservoir Rocks
 
 ## Overview
 This project implements a **Super-Resolution Convolutional Neural Network (SRCNN)** to enhance low-resolution CT scan images of rock samples**. The model learns to reconstruct high-resolution images from low-resolution inputs while preserving fine structural details such as pores, edges, and textures.
@@ -16,7 +15,7 @@ The implementation is developed using **PyTorch** and includes a full pipeline f
 
 ---
 
-##  Model Architecture
+## Model Architecture
 - Conv Layer 1 (5×5, 64 filters)
 - BatchNorm + ReLU
 - Conv Layer 2 (5×5, 64 filters)
