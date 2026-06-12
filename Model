@@ -1,0 +1,26 @@
+class SuperResolutionModel(nn.Module):
+    def __init__(self):
+        super(SuperResolutionModel, self).__init__()
+
+        self.conv1 = nn.Conv2d(1, 64, kernel_size=5, padding=2)
+        self.batch_norm1 = nn.BatchNorm2d(64)
+
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=5, padding=2)
+        self.batch_norm2 = nn.BatchNorm2d(64)
+
+        self.conv3 = nn.Conv2d(64, 1, kernel_size=5, padding=2)
+
+    def forward(self, x):
+        x = torch.relu(self.batch_norm1(self.conv1(x)))
+        x = torch.relu(self.batch_norm2(self.conv2(x)))
+
+        x = F.interpolate(
+            x,
+            scale_factor=2,
+            mode='bicubic',
+            align_corners=False
+        )
+
+        x = self.conv3(x)
+
+        return x
