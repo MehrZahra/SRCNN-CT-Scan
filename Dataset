@@ -1,0 +1,26 @@
+class ImageDataset(Dataset):
+    def __init__(self, low_res_paths, high_res_paths):
+        self.low_res_paths = low_res_paths
+        self.high_res_paths = high_res_paths
+
+    def __len__(self):
+        return len(self.low_res_paths)
+
+    def __getitem__(self, idx):
+        low_res_img = cv2.imread(self.low_res_paths[idx], cv2.IMREAD_GRAYSCALE)
+        high_res_img = cv2.imread(self.high_res_paths[idx], cv2.IMREAD_GRAYSCALE)
+
+        low_res_img = low_res_img / 255.0
+        high_res_img = high_res_img / 255.0
+
+        low_res_tensor = torch.tensor(
+            low_res_img[np.newaxis, :, :],
+            dtype=torch.float32
+        )
+
+        high_res_tensor = torch.tensor(
+            high_res_img[np.newaxis, :, :],
+            dtype=torch.float32
+        )
+
+        return low_res_tensor, high_res_tensor
